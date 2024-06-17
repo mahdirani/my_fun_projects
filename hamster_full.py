@@ -7,7 +7,7 @@ action = input("what do you want : (upgrade, recive) ")
 session = requests.Session()
 proxies = {"http": "http://127.0.0.1:8080", "https": "http://127.0.0.1:8080"}
 
-min_roi = 24
+min_roi = 72
 # set , proxies=proxies, verify=False
 for_input = 50 #int(input("Please enter how many times do you want to upgrade : "))
 #break_time = 15 #int(input("How long wait between upgrades : "))
@@ -15,8 +15,9 @@ mahdi_token = '1717578287677FKZrpIPCgMS7DaiIfqSvYXJePECPs4mvirmm6wq7DGiMLu8GwUYT
 mahdi2_token = '1717738045449lzu0v95kWohiDbaRVMlAGLNwjOg49Z0HzK3CbOFhMo5VVkoC7fM0sVYY4GrgwKJQ7154155704'
 mom_token = '1717738237089ipd6FT3vEP0wpVhETxLVjAyY60jZdb12XsVRRgXmjRaPax0JsIS9L6TGJq9LcgL6115169669'
 yosaf_token = '1717748014626gJzyGDkbomiDZHldDBRRwtWA2A2oims4gTmqUTliyRPXGfAb19VUZQKpQVOUdygW6378481367'
-tokens = {'mahdi' : mahdi_token, 'mahdi2' : mahdi2_token, 'mom' : mom_token, 'yosaf' : yosaf_token}
-tok_names = {1 : 'mahdi', 2 : "mahdi2", 3 : 'mom', 4 : 'yosaf'}
+zahra_token = '1718631666871FVbL2Kmiv3SLkm9ZmaPv4DMfeUg5hLOLjLx9rlxZKEknZ17EoFZyw6FVxwxNmTaj374377885'
+tokens = {'mahdi' : mahdi_token, 'mahdi2' : mahdi2_token, 'mom' : mom_token, 'yosaf' : yosaf_token, 'zahra' : zahra_token}
+tok_names = {1 : 'mahdi', 2 : "mahdi2", 3 : 'mom', 4 : 'yosaf' , 5 : 'zahra'}
 '''uncomment if want to use select method'''
 #print(f'{time.strftime('%X')} [+] Loading registerd Database  ......')
 #for i in range(len(tokens)):
@@ -218,8 +219,9 @@ def send_data(init_balance, token_local):
         time.sleep(1)
         print(time.strftime('%X') + f' - [+] The best upgrade is : ' + colored(f'{min["name"]}', 'green') + f' - with ROI : {int(min["roi"])} Hours')
         time.sleep(1)
-        if min['roi'] > min_roi:
-            print(time.strftime('%X') + ' - [-] Roi larger Than 24 H')
+        if int(min['roi']) > min_roi:
+            print(time.strftime('%X') + f' - [-] {colored(f"Roi larger Than {min_roi} H", "red")}')
+            sys.exit(1)
         print(time.strftime('%X') + ' - [+] Generate new Timestamp for anti-blocking ......')
         time.sleep(1)
         current_timestamp = int(time.time() * 1000)
